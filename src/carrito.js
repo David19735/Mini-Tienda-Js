@@ -1,71 +1,4 @@
-'use strict';
-
-const producto$1=document.querySelector('.producto');
-const productoImagen=producto$1.querySelector('.producto__imagen');
-const thumbs=producto$1.querySelector('.producto__thumbs');
-const contenedorColores=producto$1.querySelector('.producto__contenedor-radios');
-const btnAumentar=producto$1.querySelector('#incrementar-cantidad');
-const btnDisminuir=producto$1.querySelector('#disminuir-cantidad');
-const inputCantidad=producto$1.querySelector('#cantidad');
-
-
-
-thumbs.addEventListener('click',(e)=>{
-    
-    if(e.target.tagName==='IMG'){
-
-        const imagenSrc=e.target.src;
-        const lastIndex=imagenSrc.lastIndexOf('/');
-        const nombreImagen=imagenSrc.substring(lastIndex +1);
-        
-       productoImagen.src=`./img/tennis/${nombreImagen}`;
-
-    }
-});
-
-contenedorColores.addEventListener('click',(e)=>{
-    if(e.target.tagName==='INPUT'){
-        const colorTenis=e.target.value;
-        productoImagen.src=`./img/tennis/${colorTenis}.jpg`;
-    }
-});
-
-
-btnAumentar.addEventListener('click',(e)=>{
-
-    if(Number(inputCantidad.value)<10){
-        inputCantidad.value=Number(inputCantidad.value)+1;
-    }
-            
-});
-
-btnDisminuir.addEventListener('click',(e)=>{
-    if(Number(inputCantidad.value)>1){
-        inputCantidad.value=Number(inputCantidad.value)-1;
-    }
-});
-
-var dataProductos = {
-    productos:[
-        {
-            id:'1',
-            nombre:'Tennis Converse Standard.',
-            descripcion:'Lorem ipsum dolor sit amet',
-            precio:500.00,
-            colores:['negro','rojo','amarillo'],
-            tamaños:['1.5','2','2.5','3','3.5','4'],
-        },
-        {
-            id:'2',
-            nombre:'Tennis Converse Standard 200',
-            descripcion:'Lorem ipsum dolor sit amet eojgewhfje',
-            precio:1000.00,
-            colores:['negro','rojo','amarillo'],
-            tamaños:['1.5','2','2.5','3','3.5','4'],
-        }
-    ]
-};
-
+import dataProductos from "./data/productos";
 const botonesAbrirCarrito=document.querySelectorAll('[data-accion="abrir-carrito"]');
 const botonesCerrarCarrito=document.querySelectorAll('[data-accion="cerrar-carrito"]');
 const ventanaCarrito=document.getElementById('carrito');
@@ -80,7 +13,7 @@ const formatoMoneda=new Intl.NumberFormat('ex-MX',{style:'currency',currency:'MX
 
 
 const renderCarrito=()=>{
-    ventanaCarrito.classList.add('carrito--active');
+    ventanaCarrito.classList.add('carrito--active')
     ventanaCarrito.querySelector('.carrito__body').innerHTML="";
     
     
@@ -91,13 +24,13 @@ const renderCarrito=()=>{
       let colorImagen;
 
       if(productoCarrito.color==="negro"){
-         colorImagen="1.jpg";
+         colorImagen="1.jpg"
       }
       else if(productoCarrito.color==="rojo"){
-         colorImagen="rojo.jpg";
+         colorImagen="rojo.jpg"
       }
       else if(productoCarrito.color==="amarillo"){
-         colorImagen="amarillo.jpg";
+         colorImagen="amarillo.jpg"
       }
       
        
@@ -138,10 +71,10 @@ const renderCarrito=()=>{
 
       ventanaCarrito.querySelector('.carrito__body').innerHTML+=plantillaProducto;
       
-   });
+   })
    ventanaCarrito.querySelector('.carrito__total').innerHTML=`$${formatoMoneda.format(suma)}`;
 
-};
+}
 
 
 
@@ -149,15 +82,15 @@ botonesAbrirCarrito.forEach((boton)=>{
     
    boton.addEventListener('click',(e)=>{
         renderCarrito();
-   });
-});
+   })
+})
 
 botonesCerrarCarrito.forEach((boton)=>{
     
     boton.addEventListener('click',(e)=>{
          ventanaCarrito.classList.remove('carrito--active');
-    });
- });
+    })
+ })
 
  btnAgregarCarrito.addEventListener('click',(e)=>{
 
@@ -172,7 +105,7 @@ botonesCerrarCarrito.forEach((boton)=>{
        if(producto.id===id){
           return producto
        }
-     });
+     })
      const precio=pro[0].precio;
      let productoEnCarrito=false;
 
@@ -184,7 +117,7 @@ botonesCerrarCarrito.forEach((boton)=>{
             producto.precio+=(precio*cantidad);
             productoEnCarrito=true;
          }
-      });
+      })
       if(!productoEnCarrito){
          carrito.push({
                id:id,
@@ -197,7 +130,7 @@ botonesCerrarCarrito.forEach((boton)=>{
              });   
          }
    }
-   else {
+   else{
       carrito.push({
          id:id,
          nombre:nombre,
@@ -209,4 +142,4 @@ botonesCerrarCarrito.forEach((boton)=>{
        });
    }
 
- });
+ })
